@@ -1,7 +1,9 @@
-package br.com.alessanderleite.appfilmes;
+package br.com.alessanderleite.appfilmes.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import br.com.alessanderleite.appfilmes.R;
 
 public class MainActivity extends AppCompatActivity {
 
