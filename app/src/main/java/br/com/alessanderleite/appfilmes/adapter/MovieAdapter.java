@@ -1,6 +1,7 @@
 package br.com.alessanderleite.appfilmes.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import java.util.List;
 
 import br.com.alessanderleite.appfilmes.R;
 import br.com.alessanderleite.appfilmes.model.Movie;
+import br.com.alessanderleite.appfilmes.ui.DetailActivity;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
 
@@ -51,7 +53,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         return movieList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private ImageView mPoster;
         private TextView mTitle;
@@ -65,6 +67,22 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             mTitle = (TextView) itemView.findViewById(R.id.txt_title);
             mYear = (TextView) itemView.findViewById(R.id.txt_year);
             mRuntime = (TextView) itemView.findViewById(R.id.txt_runtime);
+
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int position = getAdapterPosition();
+            if (position != RecyclerView.NO_POSITION) {
+                Movie movie = movieList.get(position);
+                Intent intent = new Intent(context, DetailActivity.class);
+                intent.putExtra("poster", movie.getPoster());
+                intent.putExtra("title", movie.getTitle());
+                intent.putExtra("year", movie.getYear());
+                intent.putExtra("runtime", movie.getRuntime());
+                context.startActivity(intent);
+            }
         }
     }
 }
